@@ -1,11 +1,13 @@
+## 1. 安装
 ### greasyfork安装
 https://greasyfork.org/zh-CN/scripts/533808-%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BDcss-js
 
 ### 手动安装
-1. 油猴导入main.js脚本
+油猴导入main.js脚本
 ![img.png](readme.assets/img.png)
 
-2. 配置nginx
+## 2. 配置
+配置nginx
 ```nginx
        location /site-resources {
             alias E:/site-resources/;
@@ -25,7 +27,7 @@ https://greasyfork.org/zh-CN/scripts/533808-%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD
         }
 ```
 
-3. 使用
+## 3. 使用
 ![img.png](readme.assets/img2.png)
 
 ![img_1.png](readme.assets/img3.png)
