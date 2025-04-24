@@ -1,3 +1,15 @@
+// ==UserScript==
+// @name         自动加载动态css.js
+// @namespace    http://tampermonkey.net/
+// @version      2025-04-21
+// @description  try to take over the world!
+// @author       You
+// @match        https://*/*
+// @match        http://*/*
+// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @grant        none
+// ==/UserScript==
+
 (function() {
   // 默认的远程地址
   let remoteCssUrl = localStorage.getItem('remoteCssUrl') || 'https://localhost/site-resources/dynamic-css.css';
