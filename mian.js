@@ -103,6 +103,8 @@
 }
 
 #css-fab-wrapper:hover #css-fab {
+  font-size: 2.8em;
+  transition: font-size 0.1s;
 }
 
 .fab-btns {
