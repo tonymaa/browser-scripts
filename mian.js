@@ -4,8 +4,7 @@
 // @version      2025-04-21
 // @description  try to take over the world!
 // @author       You
-// @match        https://*/*
-// @match        http://*/*
+// @include      *
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // ==/UserScript==

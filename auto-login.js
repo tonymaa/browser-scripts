@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @match        https://ecq.lowcode.com/*
+// @include      *
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // @require      https://cdn.bootcss.com/jquery/2.2.1/jquery.js
@@ -60,7 +60,7 @@
 
     function loginWithUser(user) {
         const hide = showToast('loading', '正在登录' + user.name);
-        axios.post("https://ecq.lowcode.com/login", {
+        axios.post("/login", {
             userAccountId: user.accountId,
             vault: user.vault,
             userDomainCode: user.domainCode ?? "designer"
@@ -107,7 +107,7 @@
   height: 48px;
   border-radius: 50%;
   cursor: grab;
-  background: #1d2a3436;
+  background: #136fb736;
   box-shadow: 0 0px 8px rgb(189 245 255 / 98%), inset 0 3px 1px rgb(98 193 245 / 54%) !important;
   display: flex;
   align-items: center;
@@ -139,7 +139,7 @@
 </style>
 <div id="css-fab-wrapper">
   <div id="css-fab">
-    <svg style="transform: scale(0.7)" fill="#d7f5ff" t="1745546148895" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1647" width="200" height="200"><path d="M512 590.75c-142.5 0-258.75-116.25-258.75-258.75s116.25-262.5 258.75-262.5 258.75 116.25 258.75 258.75-116.25 262.5-258.75 262.5zM512 144.5c-101.25 0-183.75 82.5-183.75 183.75s82.5 183.75 183.75 183.75 183.75-82.5 183.75-183.75-82.5-183.75-183.75-183.75z" p-id="1648"></path><path d="M170.75 950.75c-18.75 0-37.5-15-37.5-37.5 0-7.5 0-11.25 0-15 0-210 172.5-382.5 382.5-382.5 22.5 0 37.5 15 37.5 37.5s-15 37.5-37.5 37.5c-168.75 0-307.5 138.75-307.5 307.5v11.25c0 22.5-18.75 41.25-37.5 41.25v0z" p-id="1649"></path><path d="M853.25 947v0c-22.5 0-37.5-15-37.5-37.5v-11.25c0-168.75-138.75-307.5-307.5-307.5-22.5 0-37.5-15-37.5-37.5s15-37.5 37.5-37.5c210 0 382.5 172.5 382.5 382.5 0 3.75 0 7.5 0 11.25 0 22.5-15 37.5-37.5 37.5z" p-id="1650"></path></svg>
+    <svg style="transform: scale(0.7)" fill="#ecf9fd" t="1745546148895" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1647"><path d="M512 590.75c-142.5 0-258.75-116.25-258.75-258.75s116.25-262.5 258.75-262.5 258.75 116.25 258.75 258.75-116.25 262.5-258.75 262.5zM512 144.5c-101.25 0-183.75 82.5-183.75 183.75s82.5 183.75 183.75 183.75 183.75-82.5 183.75-183.75-82.5-183.75-183.75-183.75z" p-id="1648"></path><path d="M170.75 950.75c-18.75 0-37.5-15-37.5-37.5 0-7.5 0-11.25 0-15 0-210 172.5-382.5 382.5-382.5 22.5 0 37.5 15 37.5 37.5s-15 37.5-37.5 37.5c-168.75 0-307.5 138.75-307.5 307.5v11.25c0 22.5-18.75 41.25-37.5 41.25v0z" p-id="1649"></path><path d="M853.25 947v0c-22.5 0-37.5-15-37.5-37.5v-11.25c0-168.75-138.75-307.5-307.5-307.5-22.5 0-37.5-15-37.5-37.5s15-37.5 37.5-37.5c210 0 382.5 172.5 382.5 382.5 0 3.75 0 7.5 0 11.25 0 22.5-15 37.5-37.5 37.5z" p-id="1650"></path></svg>
   </div>
   <div class="fab-btns">
     ${USERS.map((u, i) => `<button class="quick-login-btn" data-index="${i}">快速登录-${u.name}</button>`).join('')}
