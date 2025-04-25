@@ -87,14 +87,14 @@
 
     // 添加悬浮控制面板
     const ctrlDiv = document.createElement('div');
-    ctrlDiv.id = 'css-controller';
+    ctrlDiv.id = 'quick-login-controller';
     ctrlDiv.innerHTML = `
 <style>
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-#css-fab-wrapper {
+#quick-login-fab-wrapper {
   position: fixed;
   top: 100px;
   left: 20px;
@@ -102,7 +102,7 @@
   display: flex;
   gap: 10px;
 }
-#css-fab {
+#quick-login-fab {
   opacity: 0.75;
   width: 48px;
   height: 48px;
@@ -117,17 +117,17 @@
   font-size: 2em;
   color: #fff;
 }
-#css-fab-wrapper:hover .fab-btns {
+#quick-login-fab-wrapper:hover .quick-login-fab-btns {
   display: flex;
 }
-.fab-btns {
+.quick-login-fab-btns {
   display: none;
   flex-direction: column;
   gap: 6px;
   top: 0;
   left: 60px;
 }
-.fab-btns button {
+.quick-login-fab-btns button {
   padding: 4px 8px;
   font-size: 12px;
   background-color: white;
@@ -138,11 +138,11 @@
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 </style>
-<div id="css-fab-wrapper">
-  <div id="css-fab">
-    <svg style="transform: scale(0.7)" fill="#ecf9fd" t="1745546148895" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1647"><path d="M512 590.75c-142.5 0-258.75-116.25-258.75-258.75s116.25-262.5 258.75-262.5 258.75 116.25 258.75 258.75-116.25 262.5-258.75 262.5zM512 144.5c-101.25 0-183.75 82.5-183.75 183.75s82.5 183.75 183.75 183.75 183.75-82.5 183.75-183.75-82.5-183.75-183.75-183.75z" p-id="1648"></path><path d="M170.75 950.75c-18.75 0-37.5-15-37.5-37.5 0-7.5 0-11.25 0-15 0-210 172.5-382.5 382.5-382.5 22.5 0 37.5 15 37.5 37.5s-15 37.5-37.5 37.5c-168.75 0-307.5 138.75-307.5 307.5v11.25c0 22.5-18.75 41.25-37.5 41.25v0z" p-id="1649"></path><path d="M853.25 947v0c-22.5 0-37.5-15-37.5-37.5v-11.25c0-168.75-138.75-307.5-307.5-307.5-22.5 0-37.5-15-37.5-37.5s15-37.5 37.5-37.5c210 0 382.5 172.5 382.5 382.5 0 3.75 0 7.5 0 11.25 0 22.5-15 37.5-37.5 37.5z" p-id="1650"></path></svg>
+<div id="quick-login-fab-wrapper">
+  <div id="quick-login-fab">
+    <svg style="transform: scale(0.7); opacity: 1" fill="#ecf9fd" t="1745546148895" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1647"><path d="M512 590.75c-142.5 0-258.75-116.25-258.75-258.75s116.25-262.5 258.75-262.5 258.75 116.25 258.75 258.75-116.25 262.5-258.75 262.5zM512 144.5c-101.25 0-183.75 82.5-183.75 183.75s82.5 183.75 183.75 183.75 183.75-82.5 183.75-183.75-82.5-183.75-183.75-183.75z" p-id="1648"></path><path d="M170.75 950.75c-18.75 0-37.5-15-37.5-37.5 0-7.5 0-11.25 0-15 0-210 172.5-382.5 382.5-382.5 22.5 0 37.5 15 37.5 37.5s-15 37.5-37.5 37.5c-168.75 0-307.5 138.75-307.5 307.5v11.25c0 22.5-18.75 41.25-37.5 41.25v0z" p-id="1649"></path><path d="M853.25 947v0c-22.5 0-37.5-15-37.5-37.5v-11.25c0-168.75-138.75-307.5-307.5-307.5-22.5 0-37.5-15-37.5-37.5s15-37.5 37.5-37.5c210 0 382.5 172.5 382.5 382.5 0 3.75 0 7.5 0 11.25 0 22.5-15 37.5-37.5 37.5z" p-id="1650"></path></svg>
   </div>
-  <div class="fab-btns">
+  <div class="quick-login-fab-btns">
     ${USERS.map((u, i) => `<button class="quick-login-btn" data-index="${i}">快速登录-${u.name}</button>`).join('')}
   </div>
 </div>`;
@@ -157,12 +157,15 @@
         if (pos && typeof pos.left === 'number' && typeof pos.top === 'number') {
             wrapper.style.left = `${pos.left}px`;
             wrapper.style.top = `${pos.top}px`;
+        }else {
+            wrapper.style.left = `0px`;
+            wrapper.style.top = `50%`;
         }
     }
 
     // 拖动逻辑
-    const wrapper = document.getElementById('css-fab-wrapper');
-    const fab = document.getElementById('css-fab');
+    const wrapper = document.getElementById('quick-login-fab-wrapper');
+    const fab = document.getElementById('quick-login-fab');
     let isDragging = false, offsetX = 0, offsetY = 0;
 
     loadFabPosition();
