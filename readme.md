@@ -2,6 +2,7 @@
 ### greasyfork安装
 https://greasyfork.org/zh-CN/scripts/533808-%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BDcss-js
 
+[auto-login.user.js](./auto-login.user.js)
 ### 手动安装
 油猴导入main.js脚本
 ![img.png](readme.assets/img.png)
