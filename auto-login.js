@@ -117,6 +117,12 @@
   font-size: 2em;
   color: #fff;
 }
+#quick-login-fab-wrapper:hover #quick-login-fab {
+    opacity: 1 !important;
+    & svg {
+        fill: #ffffff !important;
+    }
+}
 #quick-login-fab-wrapper:hover .quick-login-fab-btns {
   display: flex;
 }
