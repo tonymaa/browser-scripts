@@ -16,7 +16,8 @@
 (function () {
     const USERS = [
         { name: "Zhiming", accountId: "zhiming", vault: "bn0GDFYvl0hTelADq5RfetjPqxJqffYdHJLXqJv4ZtIiTtpu/9Y44b0soLslkJF5yHVVzpSo6DFYd6JywHXUllvFtaRiCnAc/xyXD1GZfgXC8vKNrbPCclhdAsfyO2y71F2snl9LyNSAOY6wlwcoTNcIPDhYmeS2ZD3ZkeQib6+jfEyIzNJ7X6AMpE+rSEfZPRag3GxgCRH8KuWQaXjrbwwv+x+bw0ft3AYTIfO2QuKSNBcKdHx04gvCj53ecBWdBHMv+IpQuqzN2V0o3AXtwaFcSwYQGUvOwh2MlTzvVmVyZlFP05I6OAU+rcV7KIWCya6S2BQk9C+Hib65R7nTyw==" },
-        { name: "Alice", accountId: "alice", vault: "bn0GDFYvl0hTelADq5RfetjPqxJqffYdHJLXqJv4ZtIiTtpu/9Y44b0soLslkJF5yHVVzpSo6DFYd6JywHXUllvFtaRiCnAc/xyXD1GZfgXC8vKNrbPCclhdAsfyO2y71F2snl9LyNSAOY6wlwcoTNcIPDhYmeS2ZD3ZkeQib6+jfEyIzNJ7X6AMpE+rSEfZPRag3GxgCRH8KuWQaXjrbwwv+x+bw0ft3AYTIfO2QuKSNBcKdHx04gvCj53ecBWdBHMv+IpQuqzN2V0o3AXtwaFcSwYQGUvOwh2MlTzvVmVyZlFP05I6OAU+rcV7KIWCya6S2BQk9C+Hib65R7nTyw==" },
+        { name: "Zhenyu", accountId: "zhenyu", vault: "bn0GDFYvl0hTelADq5RfetjPqxJqffYdHJLXqJv4ZtIiTtpu/9Y44b0soLslkJF5yHVVzpSo6DFYd6JywHXUllvFtaRiCnAc/xyXD1GZfgXC8vKNrbPCclhdAsfyO2y71F2snl9LyNSAOY6wlwcoTNcIPDhYmeS2ZD3ZkeQib6+jfEyIzNJ7X6AMpE+rSEfZPRag3GxgCRH8KuWQaXjrbwwv+x+bw0ft3AYTIfO2QuKSNBcKdHx04gvCj53ecBWdBHMv+IpQuqzN2V0o3AXtwaFcSwYQGUvOwh2MlTzvVmVyZlFP05I6OAU+rcV7KIWCya6S2BQk9C+Hib65R7nTyw==" },
+        { name: "Rongrong", accountId: "rongrong", vault: "Xt6DQb116oMideFa+z87Upv5jhAMR6ChrnCkAG7JDHYMfSu/DGvSHJz6tIvrj7eV0jE3ksGBJPnvp/OtxDbtMuWPJXZHFTCk0jx1s2xF6KDeg8Sm+gFM0tAgUN8/xlHHzDYKHOPdLWNb8fC/bb2lReNUs4mJxzfC9CfHWer9d7AnK71+tpUFgZASHxttIC3NS65D4CGMtPTjaIA+Qu5rQvWEfO1OcwIZpE/1eprlk/XNeMsp1wOs0NqwcuJD/hKvRsGqYK0FzZU/AR1552tP1B6IVYBhh5mGpuyFppvu6M2ckTkdIMsGwB8r3oawCVHTRtFEDm58xiVoSIa5f4fXcQ==" },
         // 可添加更多用户
     ];
 
@@ -60,7 +61,7 @@
     }
 
     function loginWithUser(user) {
-        const hide = showToast('loading', '正在登录' + user.name);
+        const hide = showToast('loading', '正在登录 ' + user.name);
         axios.post("/login", {
             userAccountId: user.accountId,
             vault: user.vault,
@@ -80,8 +81,10 @@
 
     // 快捷键支持 Ctrl + Enter 登录第一个用户
     document.addEventListener('keydown', function (e) {
-        if (e.ctrlKey && e.key === 'Enter') {
+        if ((e.ctrlKey || e.altKey) && e.key === 'Enter') {
             loginWithUser(USERS[0]);
+        }else if(e.altKey && (e.key - 1) < USERS.length){
+            loginWithUser(USERS[e.key - 1]);
         }
     });
 
@@ -118,10 +121,12 @@
   color: #fff;
 }
 #quick-login-fab-wrapper:hover #quick-login-fab {
-    opacity: 1 !important;
+ opacity: 1 !important;
     & svg {
         fill: #ffffff !important;
     }
+  /*background: rgba(40,121,185,0.21);*/
+  /* box-shadow: 0 0px 8px rgba(207,245,252,0.98), inset 0 3px 1px rgba(146,212,252,0.54) !important;*/
 }
 #quick-login-fab-wrapper:hover .quick-login-fab-btns {
   display: flex;
@@ -134,6 +139,7 @@
   left: 60px;
 }
 .quick-login-fab-btns button {
+  text-align: left;
   padding: 4px 8px;
   font-size: 12px;
   background-color: white;
@@ -149,7 +155,7 @@
     <svg style="transform: scale(0.7); opacity: 1" fill="#ecf9fd" t="1745546148895" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1647"><path d="M512 590.75c-142.5 0-258.75-116.25-258.75-258.75s116.25-262.5 258.75-262.5 258.75 116.25 258.75 258.75-116.25 262.5-258.75 262.5zM512 144.5c-101.25 0-183.75 82.5-183.75 183.75s82.5 183.75 183.75 183.75 183.75-82.5 183.75-183.75-82.5-183.75-183.75-183.75z" p-id="1648"></path><path d="M170.75 950.75c-18.75 0-37.5-15-37.5-37.5 0-7.5 0-11.25 0-15 0-210 172.5-382.5 382.5-382.5 22.5 0 37.5 15 37.5 37.5s-15 37.5-37.5 37.5c-168.75 0-307.5 138.75-307.5 307.5v11.25c0 22.5-18.75 41.25-37.5 41.25v0z" p-id="1649"></path><path d="M853.25 947v0c-22.5 0-37.5-15-37.5-37.5v-11.25c0-168.75-138.75-307.5-307.5-307.5-22.5 0-37.5-15-37.5-37.5s15-37.5 37.5-37.5c210 0 382.5 172.5 382.5 382.5 0 3.75 0 7.5 0 11.25 0 22.5-15 37.5-37.5 37.5z" p-id="1650"></path></svg>
   </div>
   <div class="quick-login-fab-btns">
-    ${USERS.map((u, i) => `<button class="quick-login-btn" data-index="${i}">快速登录-${u.name}</button>`).join('')}
+    ${USERS.map((u, i) => `<button class="quick-login-btn" data-index="${i}">${i + 1}. 快速登录 ${u.name}</button>`).join('')}
   </div>
 </div>`;
     document.body.appendChild(ctrlDiv);
