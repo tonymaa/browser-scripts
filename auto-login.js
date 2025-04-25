@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         lowcodeLoginScript
+// @name         Quick login plugin / 快速登录插件
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -9,6 +9,7 @@
 // @grant        none
 // @require      https://cdn.bootcss.com/jquery/2.2.1/jquery.js
 // @require      https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js
+// @license MIT
 // ==/UserScript==
 
 
