@@ -61,7 +61,9 @@
 
         return remove;
     }
+    let prefixCache;
     function getCsrfTokenPrefix() {
+        if(prefixCache) return prefixCache;
         const defaultPrefix = 'agp-cookie-csrf';
 
         return fetch('/config.json')
@@ -72,9 +74,11 @@
                 return response.json();
             })
             .then(config => {
+                prefixCache = config.CSRF_TOKEN_PREFIX || defaultPrefix;
                 return config.CSRF_TOKEN_PREFIX || defaultPrefix;
             })
             .catch(error => {
+                prefixCache = defaultPrefix;
                 console.error('Failed to fetch config.json:', error);
                 return defaultPrefix;
             });
