@@ -18,7 +18,7 @@
     switch (window.location.host) {
         case 'can specify host here': {
             USERS = [
-                { name: "name", accountId: "accountId", vault: "encryped password", domainCode: 'optional, default to <designer>' },
+                { name: "name", accountId: "accountId", vault: "encryped password", /*domainCode: 'optional, default to <designer>'*/ },
             ];
             break;
         }
