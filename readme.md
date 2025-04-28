@@ -4,7 +4,7 @@
 * 快速登录：https://greasyfork.org/zh-CN/scripts/533913-quick-login-plugin-%E5%BF%AB%E9%80%9F%E7%99%BB%E5%BD%95%E6%8F%92%E4%BB%B6
 
 ## 2. 配置
-### autoLoadDynamic.js 额外配置
+### autoLoadDynamicCss.js 额外配置
 配置nginx
 ```nginx
        location /site-resources {
@@ -25,7 +25,7 @@
         }
 ```
 
-## 3. 使用
+## 3. UI
 ![img.png](readme.assets/img2.png)
 
 ![img_1.png](readme.assets/img3.png)
