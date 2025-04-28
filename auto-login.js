@@ -3,12 +3,10 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       You
+// @author       Tony Ma
 // @include      *
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
-// @require      https://cdn.bootcss.com/jquery/2.2.1/jquery.js
-// @require      https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js
 // @license MIT
 // ==/UserScript==
 
