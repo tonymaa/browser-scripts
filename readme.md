@@ -26,6 +26,11 @@
 ```
 
 ## 3. UI
+### autoLoadDynamicCss.js
 ![img.png](readme.assets/img2.png)
 
 ![img_1.png](readme.assets/img3.png)
+
+### quickLogin.js
+![img.png](readme.assets/img.png)
+
