@@ -4,6 +4,12 @@
 * 快速登录：https://greasyfork.org/zh-CN/scripts/533913-quick-login-plugin-%E5%BF%AB%E9%80%9F%E7%99%BB%E5%BD%95%E6%8F%92%E4%BB%B6
 
 ## 2. 配置
+### quickLogin.js 额外配置
+进入油猴主页，编辑
+![img.png](readme.assets/img4.png)
+修改USERS变量，添加账号
+![img_1.png](readme.assets/img_1.png)
+
 ### autoLoadDynamicCss.js 额外配置
 配置nginx
 ```nginx
