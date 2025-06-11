@@ -12,8 +12,7 @@
 (function() {
   // 默认的远程地址
   let remoteCssUrl = localStorage.getItem('remoteCssUrl') || 'https://localhost/site-resources/dynamic-css.css';
-
-  let autoLoad = false;
+  let autoLoad = localStorage.getItem('autoLoadCss') === 'true';
   let intervalId = null;
   let lastCss = '';
   const borderCss = `
@@ -195,6 +194,7 @@
     fabIcon.classList.remove('spin');
     document.getElementById('auto-load-btn').innerText = '自动加载CSS';
     console.log('[CSS] 自动加载已关闭');
+    localStorage.setItem('autoLoadCss', false)
   }
 
   function highLightHtml(times = 3) {
@@ -210,17 +210,26 @@
     }, 700)
   }
 
-  document.getElementById('auto-load-btn').addEventListener('click', () => {
-    if (autoLoad) {
-      stopAutoLoad()
-    } else {
-      fetchAndApplyCSS();
+    const startAutoLoad = () => {
+       fetchAndApplyCSS();
       highLightHtml()
       intervalId = setInterval(fetchAndApplyCSS, 1000);
       autoLoad = true;
       fabIcon.classList.add('spin');
       document.getElementById('auto-load-btn').innerText = '关闭自动加载';
       console.log('[CSS] 自动加载已开启');
+      localStorage.setItem('autoLoadCss', true)
+    }
+
+    if (autoLoad){
+      startAutoLoad()
+    }
+
+  document.getElementById('auto-load-btn').addEventListener('click', () => {
+    if (autoLoad) {
+      stopAutoLoad()
+    } else {
+        startAutoLoad()
     }
   });
   // 清除按钮逻辑
@@ -251,6 +260,8 @@
       window.Next?.Message?.success?.('已更新 CSS 地址');
     }
   });
+
+
 
   // 拖动逻辑
   const wrapper = document.getElementById('css-fab-wrapper');
@@ -291,4 +302,5 @@
     isDragging = false;
     fab.style.cursor = 'grab';
   });
+
 })();
