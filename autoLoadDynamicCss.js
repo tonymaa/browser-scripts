@@ -1,18 +1,22 @@
 // ==UserScript==
-// @name         自动加载动态css.js
+// @name         自动加载css.js
 // @namespace    http://tampermonkey.net/
-// @version      2025-04-21
-// @description  try to take over the world!
+// @version      2025-04-24
+// @description  加载远程/本地css样式文件
 // @author       You
-// @include      *
+// @match *://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
+// @license MIT
+// @downloadURL https://update.greasyfork.org/scripts/533808/%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BDcssjs.user.js
+// @updateURL https://update.greasyfork.org/scripts/533808/%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BDcssjs.meta.js
 // ==/UserScript==
 
 (function() {
   // 默认的远程地址
   let remoteCssUrl = localStorage.getItem('remoteCssUrl') || 'https://localhost/site-resources/dynamic-css.css';
-  let autoLoad = localStorage.getItem('autoLoadCss') === 'true';
+
+  let autoLoad = false;
   let intervalId = null;
   let lastCss = '';
   const borderCss = `
@@ -261,8 +265,6 @@
     }
   });
 
-
-
   // 拖动逻辑
   const wrapper = document.getElementById('css-fab-wrapper');
   const fab = document.getElementById('css-fab');
@@ -302,5 +304,19 @@
     isDragging = false;
     fab.style.cursor = 'grab';
   });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.altKey && (e.key.toLowerCase() === 'q')) {
+      const wrapper = document.getElementById('css-fab-wrapper');
+      if (wrapper) {
+        if (wrapper.style.display === 'none') {
+          wrapper.style.display = 'flex';
+        } else {
+          wrapper.style.display = 'none';
+        }
+      }
+    }
+  });
+
 
 })();

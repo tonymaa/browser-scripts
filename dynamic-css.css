@@ -1,17 +1,483 @@
-div{
-    /*background-color: rebeccapurple;*/
+/* @media screen and (max-width: 376px) {
+    .responsive-register-step1-form {
+        .responsive-indicates-formitem {
+            & .next-box {
+                display: inline-block;
+                align-items: flex-start !important;
+                .next-icon {
+                    margin-left: 27px;
+                }
+            }
+        }
+
+        .responsive-register-formitem-with-tooltip {
+            & > div:last-child{
+                right: -9px;
+                bottom: 7px;
+            }
+        }
+        .next-form-item[name="proofIdentity"]{
+            .next-form-item-control > div > .next-box{
+                display: ruby !important;
+                white-space: normal !important;
+            }
+            .next-box{
+                margin-left: 0 !important;
+                gap: 2px !important;
+                .next-text{
+                    text-align: left !important;
+                }
+            }
+        }
+
+    }
+} */
+/* @media screen and (max-width: 768px) {
+    .responsive-register-step1-form{
+        .use_bold_font_family{
+            font-size: calc(1.325rem + .9vw) !important;
+        }
+        .next-form-item.next-top .next-form-item-control{
+            padding-left: 0 !important;
+        }
+
+        .responsive-date-picker-form-item{
+            .datePickerRangePickerDiv{
+                width: 100% !important;
+                & > div{
+                    width: 100% !important;
+                }
+            }
+        }
+        .retrieve-info-form-item button{
+            width: auto !important;
+            padding: 0 30px;
+        }
+    }
+    .responsice-register-form-cell{
+        padding: 40px 30px 30px 30px !important;
+    }
+    .responsive-indicates-formitem{
+        .next-box{
+            flex-direction: row !important;
+            margin-left: -10px !important;
+            & > span:first-child{
+                margin-left: 0 !important;
+            }
+        }
+    }
+} */
+
+/* home page padding */
+.ant-pro-page-container-children-container{
+ padding-inline:0 !important; 
 }
 
-/*
-body{
-    position: initial !important;
-    overflow: initial !important;
+/* guide */
+/* Step 3 - Application Display */
+@media screen and (max-width: 768px) {
+
+    .next-balloon.tour-step-3{
+        margin-top: 40px !important;
+        .next-balloon-arrow{
+            left: 0 !important;
+        }
+        &::after{
+            left: 5px !important;
+        }
+    }
 }
 
-.ant-pro-layout-container{
-    overflow: initial !important;
+/* Step - 4 Status */
+/* 
+Ballon popupContainer
+(dft) => window.innerWidth <= 768 ? document.querySelector('.inbox-mian2 div[data-label="Status"] > div') : dft
+*/
+@media screen and (max-width: 768px) {
+     .tour-step-4{
+        left: inherit !important;
+        top: inherit !important;
+     }
 }
 
-html{
-    overflow: auto;
-}*/
+
+/* guide */
+/* Step 5 - My message */
+@media screen and (max-width: 768px) {
+    .next-balloon.tour-step-5{
+        margin-top: 40px !important;
+        .next-balloon-arrow{
+            left: 60px !important;
+        }
+        &::after{
+            left: 65px !important;
+        }
+    }
+}
+
+/* guide */
+/* Step 6 - My doc */
+@media screen and (max-width: 768px) {
+    .next-balloon.tour-step-6{
+        margin-top: 40px !important;
+        .next-balloon-arrow{
+            left: 125px !important;
+        }
+        .next-balloon-arrow-content{
+        }
+        &::after{
+            left: 130px !important;
+        }
+    }
+}
+
+/* guide */
+/* Step 7 - My management */
+@media screen and (max-width: 768px) {
+    .next-balloon.tour-step-7{
+        margin-top: 40px !important;
+        .next-balloon-arrow{
+            left: 190px !important;
+        }
+        .next-balloon-arrow-content{
+        }
+        &::after{
+            left: 195px !important;
+        }
+    }
+}
+
+/* guide */
+/* Step 9 - services */
+/* Ballon popupContainer: () => window.innerWidth <= 768 ? document.querySelector('.action-on-phone-dropdown-container .fd-layout-p-spacing > span:nth-child(2)') : document.body */
+/* open menu actions: window.dispatchEvent(new Event("cc-home-open-mobile-action-items")); */
+/* close menu actions: window.dispatchEvent(new Event("cc-home-close-mobile-action-items")); */
+@media screen and (max-width: 768px) {
+    .next-balloon.tour-step-9{
+        margin-top: 5px !important;
+        margin-left: inherit !important;
+        left: inherit !important;
+        top: inherit !important;
+        .next-balloon-arrow{
+            left: 10px !important;
+        }
+        &::after{
+            left: 15px !important;
+        }
+        .next-balloon-content > div:nth-child(1) > div{
+            display: inline-block;
+            text-align: right;
+        }
+        .next-balloon-content > div:nth-child(2) > div{
+            display: inline-block;
+        }
+         .next-balloon-content > div:last-child > div{
+            display: inline-block;
+            text-align: left;
+        }
+    }
+}
+
+
+/* guide */
+/* Step 10 - My profile */
+/* Ballon popupContainer: () => window.innerWidth <= 768 ? document.querySelector('.action-on-phone-dropdown-container .fd-layout-p-spacing > span:nth-child(3)') : document.body */
+@media screen and (max-width: 768px) {
+    .next-balloon.tour-step-10{
+        margin-top: 5px !important;
+        margin-left: inherit !important;
+        left: inherit !important;
+        top: inherit !important;
+        .next-balloon-arrow{
+            left: 10px !important;
+        }
+        &::after{
+            left: 15px !important;
+        }
+        .next-balloon-content > div:nth-child(1) > div{
+            display: inline-block;
+            text-align: right;
+        }
+        .next-balloon-content > div:nth-child(2) > div{
+            display: inline-block;
+        }
+         .next-balloon-content > div:last-child > div{
+            display: inline-block;
+            text-align: left;
+        }
+    }
+}
+
+/* guide */
+/* Step 11 - Logout */
+/* Ballon popupContainer: () => window.innerWidth <= 768 ? document.querySelector('.action-on-phone-dropdown-container .fd-layout-p-spacing > span:nth-child(4)') : document.body */
+@media screen and (max-width: 768px) {
+    .next-balloon.tour-step-11{
+        margin-top: 5px !important;
+        margin-left: inherit !important;
+        left: inherit !important;
+        top: inherit !important;
+        .next-balloon-arrow{
+            left: 10px !important;
+        }
+        &::after{
+            left: 15px !important;
+        }
+        .next-balloon-content > div:nth-child(1) > div{
+            display: inline-block;
+            text-align: right;
+        }
+        .next-balloon-content > div:nth-child(2) > div{
+            display: inline-block;
+        }
+        .next-balloon-content > div:last-child > div{
+            display: inline-block;
+            text-align: left;
+        }
+    }
+}
+
+
+
+
+
+/* 
+Balloon191 - step11
+Balloon184 - step10
+Balloon179 - step9
+Balloon171 - step8
+Balloon166 - step7
+Balloon160 - step6
+Balloon154 - step5
+Balloon146 - step4
+Balloon136 - step3
+Balloon128 - step2
+Balloon121 - step1
+*/
+@media screen and (max-width: 768px) {
+    .tour-step-common{
+            left: inherit !important;
+            top: inherit !important;
+    }
+}
+
+/* 
+@media screen and (max-width: 768px) {
+    .responsive-upload-form-item{
+        .next-upload-list-item.next-upload-list-item-done{
+            height: auto !important;
+            .next-upload-list-item-name{
+                white-space: normal;
+                word-break: break-all;
+            }
+        }
+    }
+} */
+
+
+
+/* @media screen and (max-width: 768px) {
+.edit-account-role-radio-group-form-item{
+        .next-form-item{
+            margin: 0 !important;
+        }
+        .next-radio-label{
+            white-space: nowrap;
+        }
+        .next-radio-wrapper{
+            display: flex !important;
+        }
+        .radio-container-block{
+            padding-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .tip-padding-acc-2 .next-box{
+            margin-top: 56px;
+            gap: 0;
+        }
+        .next-form-item-label{
+            text-align: left;
+        }
+        .next-form-item{
+            flex-direction: column !important;
+        }
+        .tip-padding-acc-2 .next-box{
+            margin-top: 40px !important;
+        }
+    }
+} */
+
+/* @media screen and (max-width: 768px) {
+    .next-table .next-table-cell-wrapper::before{
+        font-family: 'Hero New Extra Bold' !important;
+    }
+} */
+
+/* @media screen and (max-width: 768px) {
+    .action-on-phone .tecq-img {
+        margin-left: 2px !important;
+        transform: scale(0.9);
+    }
+} */
+
+/* @media screen and (max-width: 768px) {
+  .responsive-profile-tab {
+
+    .next-tabs-nav {
+      display: flex !important;
+      align-items: center;
+      &>li {
+        flex: 1;
+        text-align: left;
+      }
+
+      .next-icon svg {
+        width: 30px !important;
+        font-size: 30px !important;
+      }
+
+      .next-icon+span {
+        display: none;
+      }
+
+      .next-badge-count {
+        margin-left: 3px;
+        margin-top: -13px;
+      }
+      .next-tabs-tab.active::before{
+        width: 62px !important;
+      }
+    }
+  }
+} */
+
+
+/* .overlay-img{
+    src: 'http://album.tonyma.cn:47891/api/images/image/20240921111011_82fab1bf3f4942c6aa19756a1f483720_0.jpg';
+}
+
+.s-image.cover-img img{
+    src: 'http://album.tonyma.cn:47891/api/images/image/20240921111011_82fab1bf3f4942c6aa19756a1f483720_0.jpg';
+} */
+
+
+
+/* .lc-workspace-top-area{
+    background-image: url('https://th.bing.com/th/id/R.c255a86440d0bb9a5d96577e412b09fa?rik=stNShsWjgVnSaQ&riu=http%3a%2f%2fp9.qhimg.com%2ft01de4c832debf32bee.jpg&ehk=4DBkXfKDNYNCEptquWPQuha7JrbIHe9l4rQydQhyp4w%3d&risl=&pid=ImgRaw&r=0');
+    background-size: cover;
+}
+
+.lc-workspace-left-area{
+    background-image: url('https://th.bing.com/th/id/R.c255a86440d0bb9a5d96577e412b09fa?rik=stNShsWjgVnSaQ&riu=http%3a%2f%2fp9.qhimg.com%2ft01de4c832debf32bee.jpg&ehk=4DBkXfKDNYNCEptquWPQuha7JrbIHe9l4rQydQhyp4w%3d&risl=&pid=ImgRaw&r=0');
+    background-size: cover;
+}
+.lc-workspace-workbench{
+    background-color: rgb(105, 96, 96) !important;
+}
+
+.lc-settings-main{
+    background-image: url('https://th.bing.com/th/id/R.c255a86440d0bb9a5d96577e412b09fa?rik=stNShsWjgVnSaQ&riu=http%3a%2f%2fp9.qhimg.com%2ft01de4c832debf32bee.jpg&ehk=4DBkXfKDNYNCEptquWPQuha7JrbIHe9l4rQydQhyp4w%3d&risl=&pid=ImgRaw&r=0');
+    background-position: center center;
+    background-size: cover;
+}
+
+.lc-left-fixed-pane, .lc-top-area, .lc-left-area{
+    background-image: url('https://fun.youth.cn/gnzx/201904/W020190403622021217194.jpg');
+    background-position: center center;
+    background-size: cover;
+}
+.lc-panel-body > div > div{
+    background-image: url('https://th.bing.com/th/id/R.c255a86440d0bb9a5d96577e412b09fa?rik=stNShsWjgVnSaQ&riu=http%3a%2f%2fp9.qhimg.com%2ft01de4c832debf32bee.jpg&ehk=4DBkXfKDNYNCEptquWPQuha7JrbIHe9l4rQydQhyp4w%3d&risl=&pid=ImgRaw&r=0') !important;
+    background-position: center center;
+    background-size: cover;
+} */
+
+
+/* @media screen and (max-width: 768px) {
+    .guide-tour-welcome-modal{
+        max-height: calc(100vh - 80px) !important;
+        height: calc(100vh - 80px) !important;
+        margin-top: -30px !important;
+        .next-dialog-body{
+            max-height: calc(100vh - 80px) !important;
+            height: calc(100vh - 80px) !important;
+        }
+        .next-overlay-inner{
+            overflow: hidden !important;
+        }
+        .next-text{
+            text-align: center;
+        }
+        .show-around-btn-cell{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .show-around-btn-cell button, .guide-tour-cancel-btn-cell button{
+            max-width: 200px !important;
+            margin-top: 10px;
+        }
+        .guide-text{
+            margin-top: 0 !important;
+        }
+    }
+}
+@media screen and (max-width: 375px) {
+    .guide-tour-welcome-modal{
+        max-height: 100vh !important;
+        height: 100vh !important;
+        margin-top: -70px !important;
+        .next-dialog-body{
+            max-height: 100vh !important;
+            height: 100vh !important;
+        }
+    }
+} */
+ /* .ant-layout-sider{
+    min-width: 150px !important;
+ } */
+
+/* .next-icon.next-icon-delete-filling.next-input-hint:focus{
+    opacity: 1 !important;
+} */
+/* .next-icon.next-icon-delete-filling.next-input-hint:hover{
+    background-color: red;
+} */
+
+/* @media screen and (max-width: 768px) {
+        .responsive-button-groups{
+        flex-direction: column !important;
+        & > button{
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+    }
+} */
+
+/* #Button93[__id="node_ocmc4kvzee9"] {
+    color: rgb(19, 25, 144);
+} */
+
+/* .one-hot-spot-container > span{
+    transform: rotate3d(1,0,0,45deg) !important;
+    &::before{
+        transform: rotate3d(1,0,0,45deg) !important;
+    }
+} */
+/* .pnlm-hotspot-base.custom-hotspot > div{
+    border-radius: 50% !important;
+    box-shadow: 2px 20px 10px rgba(0, 0, 0, 0.5);
+} */
+
+/* :root{
+    pre, span{
+        background-color: rgb(125, 149, 231);       
+    }
+} */
+
+
+:root *:not(.lce-page *) {
+    
+}
+

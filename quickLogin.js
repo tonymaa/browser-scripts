@@ -1,11 +1,10 @@
 // ==UserScript==
-// @name         Quick login plugin / 快速登录插件
+// @name         Quick login plugin / 快速登录插件 (Pure JS)
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
+// @version      0.2
+// @description  纯原生JS版快速登录插件
 // @author       Tony Ma
-// @include      *
-// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @match        *://*/*
 // @grant        none
 // @license MIT
 // ==/UserScript==
@@ -22,9 +21,28 @@
             ];
             break;
         }
+        case '192.168.2.27': {
+            USERS = [
+                { name: "Wangyu", accountId: "wangyu", vault: "TmsoAxYNvhcgc3i/AKjzoGJWlWZ+8Rn8A9Tn/TCiVNjuRifPeA8G3dEyus6O8NFcKgcnuk8SPdK3R+A2pjmIj5GZtGFfMQDiZCOiwAV023sVCMqWQFfyD6+OCq3lGRuNkNitm+mdhrQaLqiq9Tm7jN+sBZUPpBclTPBpOFRnD0u/UU6nlONFyoTmeiNs97qk8JTxhvVljVSNSEJvRsN9tm4g2j62b4kGZh/pwPXsZvSvWa5QTNFUW7iYNLSnUfit1LXEjLyw1d4On21s6fEazkcX9bfJJ6u/L6VoMklMFo8oF0roUSXioBdH17BaNuNCS8VDMl3LSjNBaj4HzfGHaQ==", /*domainCode: 'optional, default to <designer>'*/ },
+            ];
+            break;
+        }
+        case '192.168.2.11': {
+            USERS = [
+                { name: "管理员", accountId: "admin", vault: "0RevY+UTEYTGSHG0vAK/3hjwxmhKes6MFLBZ6LfTDFAptD5gdRdXzGDnZYL7+z5gyB5IYdXln5yUjqoI/KZAFUTgvez0g23uTQGnl0X3aqInG1F9UcckD9Ho2X7igQj6/ZYkPDvq6HtJCT112cG+4xqsJeIHtN10aMM4pOFCCQNlpqvvXCFYDPFMqr98Y61ztNXlDuhdhFEe4/lUsx4UaYpn2nu/qm+Pl5gDiP4vgYkkL65s3uKjFyZMNhat9YJN3aFCmGgaHt6/WhZ/wlufnwL0f9gVWQCvYkIrlXNuzusmrTxLtkSycZVBtpbfYRE71fk6bBpzzyy6UzC+kKiaeg==", /*domainCode: 'optional, default to <designer>'*/ },
+            ];
+            break;
+        }
+        case '192.168.2.21': {
+            USERS = [
+                { name: "管理员", accountId: "admin", vault: "thqVlPGmO8z53Ret3JjKgFcx6o4YfGqoCjSxT51O74bZFgzCtNPeW+VLamA/y9T3mmvFDkOmZHCi038RTp0Wp4ENVMQspd1pX2yZ6/idFx2QgpSyXQ2wMMwXr4i0+ixvOykNSZ/0eWidCRgMWzt6LZiOZFxKsNHk0zY+mw25EqxkkP4JmoklfSlJDr7p4Uqq6WB/Y7cDOtYVZsVh/dI21Gr90B6mgj54Xm2sU7hN0227U9ywLZ9HrDt3z3KxaTAWSbebFVkFU3x9XafLZlHL4ZSfZO7QufgaCkL8AAnKQDcbJUqyiW5vUAdUc4M4MeAXTQwv6lL/14U8Cf1sWMQC1A==" },
+            ];
+            break;
+        }
         default: USERS = [
-            { name: "Zhiming", accountId: "zhiming", vault: "bn0GDFYvl0hTelADq5RfetjPqxJqffYdHJLXqJv4ZtIiTtpu/9Y44b0soLslkJF5yHVVzpSo6DFYd6JywHXUllvFtaRiCnAc/xyXD1GZfgXC8vKNrbPCclhdAsfyO2y71F2snl9LyNSAOY6wlwcoTNcIPDhYmeS2ZD3ZkeQib6+jfEyIzNJ7X6AMpE+rSEfZPRag3GxgCRH8KuWQaXjrbwwv+x+bw0ft3AYTIfO2QuKSNBcKdHx04gvCj53ecBWdBHMv+IpQuqzN2V0o3AXtwaFcSwYQGUvOwh2MlTzvVmVyZlFP05I6OAU+rcV7KIWCya6S2BQk9C+Hib65R7nTyw==" },
-            { name: "Zhenyu", accountId: "zhenyu", vault: "bn0GDFYvl0hTelADq5RfetjPqxJqffYdHJLXqJv4ZtIiTtpu/9Y44b0soLslkJF5yHVVzpSo6DFYd6JywHXUllvFtaRiCnAc/xyXD1GZfgXC8vKNrbPCclhdAsfyO2y71F2snl9LyNSAOY6wlwcoTNcIPDhYmeS2ZD3ZkeQib6+jfEyIzNJ7X6AMpE+rSEfZPRag3GxgCRH8KuWQaXjrbwwv+x+bw0ft3AYTIfO2QuKSNBcKdHx04gvCj53ecBWdBHMv+IpQuqzN2V0o3AXtwaFcSwYQGUvOwh2MlTzvVmVyZlFP05I6OAU+rcV7KIWCya6S2BQk9C+Hib65R7nTyw==" },
+            { name: "Zhiming(MGF1_256)", accountId: "zhiming", vault: "MaTvLJGPrZnSzNfhfQpDULHWvdwDTOLD7zg7MZTz9qB8h69twySAIcOrkUwy4ozW58vsYXFSA3eEaOH1deOfUh1zwJHqNMq2409uwGd1aS0zQd7AGMHvwva8mAiZavFN/aF8rV6lcpsjP5aCSKEKIIs4HwVcCK0qBNe8Lb6BZ9PCJEZ7IYbCQNWK9rEgg8jlIVIiThIoi6wUVRMwSrjtnFT+eFqybf8pRUMsdMEo9iLcncyktQv4Umm3HtR+gFikMCTXA/hMSu3wQI/P6a+zx77XGu+n9olwJucpCfrrS1m2AwfoEutRWVVcmD8eZbY7K598Kw0SRzWN0KBYG6H4cg==" },
+            { name: "Zhiming(PKCS1)", accountId: "zhiming", vault: "bn0GDFYvl0hTelADq5RfetjPqxJqffYdHJLXqJv4ZtIiTtpu/9Y44b0soLslkJF5yHVVzpSo6DFYd6JywHXUllvFtaRiCnAc/xyXD1GZfgXC8vKNrbPCclhdAsfyO2y71F2snl9LyNSAOY6wlwcoTNcIPDhYmeS2ZD3ZkeQib6+jfEyIzNJ7X6AMpE+rSEfZPRag3GxgCRH8KuWQaXjrbwwv+x+bw0ft3AYTIfO2QuKSNBcKdHx04gvCj53ecBWdBHMv+IpQuqzN2V0o3AXtwaFcSwYQGUvOwh2MlTzvVmVyZlFP05I6OAU+rcV7KIWCya6S2BQk9C+Hib65R7nTyw==" },
+            { name: "Zhenyu", accountId: "zhenyu", vault: "MaTvLJGPrZnSzNfhfQpDULHWvdwDTOLD7zg7MZTz9qB8h69twySAIcOrkUwy4ozW58vsYXFSA3eEaOH1deOfUh1zwJHqNMq2409uwGd1aS0zQd7AGMHvwva8mAiZavFN/aF8rV6lcpsjP5aCSKEKIIs4HwVcCK0qBNe8Lb6BZ9PCJEZ7IYbCQNWK9rEgg8jlIVIiThIoi6wUVRMwSrjtnFT+eFqybf8pRUMsdMEo9iLcncyktQv4Umm3HtR+gFikMCTXA/hMSu3wQI/P6a+zx77XGu+n9olwJucpCfrrS1m2AwfoEutRWVVcmD8eZbY7K598Kw0SRzWN0KBYG6H4cg==" },
             { name: "Rongrong", accountId: "rongrong", vault: "Xt6DQb116oMideFa+z87Upv5jhAMR6ChrnCkAG7JDHYMfSu/DGvSHJz6tIvrj7eV0jE3ksGBJPnvp/OtxDbtMuWPJXZHFTCk0jx1s2xF6KDeg8Sm+gFM0tAgUN8/xlHHzDYKHOPdLWNb8fC/bb2lReNUs4mJxzfC9CfHWer9d7AnK71+tpUFgZASHxttIC3NS65D4CGMtPTjaIA+Qu5rQvWEfO1OcwIZpE/1eprlk/XNeMsp1wOs0NqwcuJD/hKvRsGqYK0FzZU/AR1552tP1B6IVYBhh5mGpuyFppvu6M2ckTkdIMsGwB8r3oawCVHTRtFEDm58xiVoSIa5f4fXcQ==" },
             { name: "Yichun", accountId: "yichun", vault: "bn0GDFYvl0hTelADq5RfetjPqxJqffYdHJLXqJv4ZtIiTtpu/9Y44b0soLslkJF5yHVVzpSo6DFYd6JywHXUllvFtaRiCnAc/xyXD1GZfgXC8vKNrbPCclhdAsfyO2y71F2snl9LyNSAOY6wlwcoTNcIPDhYmeS2ZD3ZkeQib6+jfEyIzNJ7X6AMpE+rSEfZPRag3GxgCRH8KuWQaXjrbwwv+x+bw0ft3AYTIfO2QuKSNBcKdHx04gvCj53ecBWdBHMv+IpQuqzN2V0o3AXtwaFcSwYQGUvOwh2MlTzvVmVyZlFP05I6OAU+rcV7KIWCya6S2BQk9C+Hib65R7nTyw==" },
             { name: "管理员", accountId: "admin", vault: "ii6yw5jQAviHVP2xxL7g1h0uQjSfjM94iNIQmD1QnhX74BmeNTJ67CKjCq1jMNwfMlK4+prYXsCLnhx5UedUH0PaBZ0fnlXC54J2dgDfmuvNyv1qHZaBHnsrgDAiS4GVNkwncour2lTAwNn4f9vdWfnjvzc8TUcNWHihcEtiEUj7YSyijfNjvjv7A+usH2e65f+zFCDypkIGuo+wwz0+WFKpSSMJGsncwaKIucG1YI+3olR7lvGPVVb2BjfLcLT1eXV5EEP9H/VJxfzUELQSKFZZ0LsuVWwfzvZIZcmkx9oxn0eV5+9zbhma8ItYLxM0j6rU3zYlOc1Q1twmZgGpPQ==" },
@@ -140,8 +158,18 @@
             loginWithUser(USERS[0]);
         } else if (e.altKey && (e.key - 1) < USERS.length) {
             loginWithUser(USERS[e.key - 1]);
+        } else if (e.altKey && (e.key.toLowerCase() === 'q')) {
+            const wrapper = document.getElementById('quick-login-fab-wrapper');
+            if (wrapper) {
+                if (wrapper.style.display === 'none') {
+                    wrapper.style.display = 'flex';
+                } else {
+                    wrapper.style.display = 'none';
+                }
+            }
         }
     });
+
 
     // 添加悬浮控制面板
     const ctrlDiv = document.createElement('div');
