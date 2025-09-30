@@ -163,12 +163,15 @@
             if (wrapper) {
                 if (wrapper.style.display === 'none') {
                     wrapper.style.display = 'flex';
+                    localStorage.setItem('login-fabVisible', 'true');
                 } else {
                     wrapper.style.display = 'none';
+                    localStorage.setItem('login-fabVisible', 'false');
                 }
             }
         }
     });
+
 
 
     // 添加悬浮控制面板
@@ -211,6 +214,15 @@
         } else {
             wrapper.style.left = `0px`;
             wrapper.style.top = `50%`;
+        }
+
+
+        // 加载显示/隐藏状态
+        const visible = localStorage.getItem('login-fabVisible');
+        if (visible === 'false') {
+            wrapper.style.display = 'none';
+        } else {
+            wrapper.style.display = 'flex';
         }
     }
 

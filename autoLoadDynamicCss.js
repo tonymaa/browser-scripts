@@ -152,6 +152,14 @@
       wrapper.style.left = `${pos.left}px`;
       wrapper.style.top = `${pos.top}px`;
     }
+
+    // 加载显示/隐藏状态
+    const visible = localStorage.getItem('dynamic-css-fabVisible');
+    if (visible === 'false') {
+      wrapper.style.display = 'none';
+    } else {
+      wrapper.style.display = 'flex';
+    }
   }
 
   const getDocument = () => {
@@ -305,13 +313,15 @@
   });
 
   document.addEventListener('keydown', function (e) {
-    if (e.altKey && (e.key.toLowerCase() === 'q')) {
+    if (e.altKey && (e.key.toLowerCase() === 'w')) {
       const wrapper = document.getElementById('css-fab-wrapper');
       if (wrapper) {
         if (wrapper.style.display === 'none') {
           wrapper.style.display = 'flex';
+          localStorage.setItem('dynamic-css-fabVisible', 'true');
         } else {
           wrapper.style.display = 'none';
+          localStorage.setItem('dynamic-css-fabVisible', 'false');
         }
       }
     }
