@@ -15,8 +15,7 @@
 (function() {
   // 默认的远程地址
   let remoteCssUrl = localStorage.getItem('remoteCssUrl') || 'https://localhost/site-resources/dynamic-css.css';
-
-  let autoLoad = false;
+  let autoLoad = localStorage.getItem('autoLoadCss') === 'true';
   let intervalId = null;
   let lastCss = '';
   const borderCss = `
@@ -214,26 +213,26 @@
     }, 700)
   }
 
-    const startAutoLoad = () => {
-       fetchAndApplyCSS();
-      highLightHtml()
-      intervalId = setInterval(fetchAndApplyCSS, 1000);
-      autoLoad = true;
-      fabIcon.classList.add('spin');
-      document.getElementById('auto-load-btn').innerText = '关闭自动加载';
-      console.log('[CSS] 自动加载已开启');
-      localStorage.setItem('autoLoadCss', true)
-    }
+  const startAutoLoad = () => {
+    fetchAndApplyCSS();
+    highLightHtml()
+    intervalId = setInterval(fetchAndApplyCSS, 1000);
+    autoLoad = true;
+    fabIcon.classList.add('spin');
+    document.getElementById('auto-load-btn').innerText = '关闭自动加载';
+    console.log('[CSS] 自动加载已开启');
+    localStorage.setItem('autoLoadCss', true)
+  }
 
-    if (autoLoad){
-      startAutoLoad()
-    }
+  if (autoLoad){
+    startAutoLoad()
+  }
 
   document.getElementById('auto-load-btn').addEventListener('click', () => {
     if (autoLoad) {
       stopAutoLoad()
     } else {
-        startAutoLoad()
+      startAutoLoad()
     }
   });
   // 清除按钮逻辑
