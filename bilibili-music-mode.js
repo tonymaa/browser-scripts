@@ -29,6 +29,7 @@
 .danmaku-box,
 .recommend-list-container,
 .video-desc-container,
+.activity-m-v1,
 .left-entry{
     display: none !important;
 }
@@ -37,16 +38,17 @@
 }
 .video-toolbar-container{
     opacity: 0 !important;
+    pointer-events: none !important;
 }
 .bpx-player-video-wrap video{
     display: none !important;
 }
 
 .player-wrap{
-    height: 100px !important;
+    height: 120px !important;
 }
 .bpx-player-primary-area{
-    height: 100px !important;
+    height: 120px !important;
 }
 .bpx-player-top-left-follow{
     display: none !important;
@@ -60,8 +62,18 @@
 .bpx-player-video-area{
     background-color: white !important;
 }
+#playlistToolbar{
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
 #commentapp{
     display: none !important;
+}
+.bpx-player-container{
+    box-shadow: none !important;
+}
+body{
+    background-color: white !important;
 }
     `;
 
