@@ -42,10 +42,17 @@
             ];
             break;
         }
+        case '192.168.0.110': {
+            USERS = [
+                { name: "Zhiming(MGF1_256)", accountId: "zhiming", password: DEFAULT_PASSWORD, vault: "MaTvLJGPrZnSzNfhfQpDULHWvdwDTOLD7zg7MZTz9qB8h69twySAIcOrkUwy4ozW58vsYXFSA3eEaOH1deOfUh1zwJHqNMq2409uwGd1aS0zQd7AGMHvwva8mAiZavFN/aF8rV6lcpsjP5aCSKEKIIs4HwVcCK0qBNe8Lb6BZ9PCJEZ7IYbCQNWK9rEgg8jlIVIiThIoi6wUVRMwSrjtnFT+eFqybf8pRUMsdMEo9iLcncyktQv4Umm3HtR+gFikMCTXA/hMSu3wQI/P6a+zx77XGu+n9olwJucpCfrrS1m2AwfoEutRWVVcmD8eZbY7K598Kw0SRzWN0KBYG6H4cg==" },
+                { name: "管理员", accountId: "admin", password: DEFAULT_PASSWORD, vault: "thqVlPGmO8z53Ret3JjKgFcx6o4YfGqoCjSxT51O74bZFgzCtNPeW+VLamA/y9T3mmvFDkOmZHCi038RTp0Wp4ENVMQspd1pX2yZ6/idFx2QgpSyXQ2wMMwXr4i0+ixvOykNSZ/0eWidCRgMWzt6LZiOZFxKsNHk0zY+mw25EqxkkP4JmoklfSlJDr7p4Uqq6WB/Y7cDOtYVZsVh/dI21Gr90B6mgj54Xm2sU7hN0227U9ywLZ9HrDt3z3KxaTAWSbebFVkFU3x9XafLZlHL4ZSfZO7QufgaCkL8AAnKQDcbJUqyiW5vUAdUc4M4MeAXTQwv6lL/14U8Cf1sWMQC1A==" },
+            ];
+            break;
+        }
         default: USERS = [
+            { name: "管理员", accountId: "admin", password: DEFAULT_PASSWORD, vault: "ii6yw5jQAviHVP2xxL7g1h0uQjSfjM94iNIQmD1QnhX74BmeNTJ67CKjCq1jMNwfMlK4+prYXsCLnhx5UedUH0PaBZ0fnlXC54J2dgDfmuvNyv1qHZaBHnsrgDAiS4GVNkwncour2lTAwNn4f9vdWfnjvzc8TUcNWHihcEtiEUj7YSyijfNjvjv7A+usH2e65f+zFCDypkIGuo+wwz0+WFKpSSMJGsncwaKIucG1YI+3olR7lvGPVVb2BjfLcLT1eXV5EEP9H/VJxfzUELQSKFZZ0LsuVWwfzvZIZcmkx9oxn0eV5+9zbhma8ItYLxM0j6rU3zYlOc1Q1twmZgGpPQ==" },
             // { name: "管理员", accountId: "admin", vault: "thqVlPGmO8z53Ret3JjKgFcx6o4YfGqoCjSxT51O74bZFgzCtNPeW+VLamA/y9T3mmvFDkOmZHCi038RTp0Wp4ENVMQspd1pX2yZ6/idFx2QgpSyXQ2wMMwXr4i0+ixvOykNSZ/0eWidCRgMWzt6LZiOZFxKsNHk0zY+mw25EqxkkP4JmoklfSlJDr7p4Uqq6WB/Y7cDOtYVZsVh/dI21Gr90B6mgj54Xm2sU7hN0227U9ywLZ9HrDt3z3KxaTAWSbebFVkFU3x9XafLZlHL4ZSfZO7QufgaCkL8AAnKQDcbJUqyiW5vUAdUc4M4MeAXTQwv6lL/14U8Cf1sWMQC1A==" },
             { name: "Zhiming(MGF1_256)", accountId: "zhiming", password: DEFAULT_PASSWORD, vault: "MaTvLJGPrZnSzNfhfQpDULHWvdwDTOLD7zg7MZTz9qB8h69twySAIcOrkUwy4ozW58vsYXFSA3eEaOH1deOfUh1zwJHqNMq2409uwGd1aS0zQd7AGMHvwva8mAiZavFN/aF8rV6lcpsjP5aCSKEKIIs4HwVcCK0qBNe8Lb6BZ9PCJEZ7IYbCQNWK9rEgg8jlIVIiThIoi6wUVRMwSrjtnFT+eFqybf8pRUMsdMEo9iLcncyktQv4Umm3HtR+gFikMCTXA/hMSu3wQI/P6a+zx77XGu+n9olwJucpCfrrS1m2AwfoEutRWVVcmD8eZbY7K598Kw0SRzWN0KBYG6H4cg==" },
-            { name: "管理员", accountId: "admin", password: DEFAULT_PASSWORD, vault: "ii6yw5jQAviHVP2xxL7g1h0uQjSfjM94iNIQmD1QnhX74BmeNTJ67CKjCq1jMNwfMlK4+prYXsCLnhx5UedUH0PaBZ0fnlXC54J2dgDfmuvNyv1qHZaBHnsrgDAiS4GVNkwncour2lTAwNn4f9vdWfnjvzc8TUcNWHihcEtiEUj7YSyijfNjvjv7A+usH2e65f+zFCDypkIGuo+wwz0+WFKpSSMJGsncwaKIucG1YI+3olR7lvGPVVb2BjfLcLT1eXV5EEP9H/VJxfzUELQSKFZZ0LsuVWwfzvZIZcmkx9oxn0eV5+9zbhma8ItYLxM0j6rU3zYlOc1Q1twmZgGpPQ==" },
             // { name: "Zhiming(PKCS1)", accountId: "zhiming", vault: "bn0GDFYvl0hTelADq5RfetjPqxJqffYdHJLXqJv4ZtIiTtpu/9Y44b0soLslkJF5yHVVzpSo6DFYd6JywHXUllvFtaRiCnAc/xyXD1GZfgXC8vKNrbPCclhdAsfyO2y71F2snl9LyNSAOY6wlwcoTNcIPDhYmeS2ZD3ZkeQib6+jfEyIzNJ7X6AMpE+rSEfZPRag3GxgCRH8KuWQaXjrbwwv+x+bw0ft3AYTIfO2QuKSNBcKdHx04gvCj53ecBWdBHMv+IpQuqzN2V0o3AXtwaFcSwYQGUvOwh2MlTzvVmVyZlFP05I6OAU+rcV7KIWCya6S2BQk9C+Hib65R7nTyw==" },
             // { name: "2.21 server MGF1-sha256管理员", accountId: "admin", vault: "PAJ4dBcpkeAI7ezBt+zgSfDkEsfoqKEPQFchq87nnH8kpxQi3OmpQwzE+jyIF+yC4Y9M4TNMG8SyD8rNurMe52PKds3VhSgwF0L82ApJ4EMxNBLHG02yzFo1K8sfGJYYPLF5zD70bWBFV+XQClk9A0Ftpgy0EiCnUfPS491PJN7Lz2pW2Ufy/LHN6wSl5f0Lt0DEYqwI9gHePdhP6csToA1A3ezAaP6YMmVG1IqqEp2y3dGVvEqQZfuzPtSCY22GLLeTw0BxMvaWa6sSxK1ariPbvPd5HO86ODzvK4A1sdTh8SBzUIggwdG3sMPWl+O5vjoXpUBOmXfUbPhP5h71zw==" },
             { name: "Zhenyu", accountId: "zhenyu", password: DEFAULT_PASSWORD, vault: "MaTvLJGPrZnSzNfhfQpDULHWvdwDTOLD7zg7MZTz9qB8h69twySAIcOrkUwy4ozW58vsYXFSA3eEaOH1deOfUh1zwJHqNMq2409uwGd1aS0zQd7AGMHvwva8mAiZavFN/aF8rV6lcpsjP5aCSKEKIIs4HwVcCK0qBNe8Lb6BZ9PCJEZ7IYbCQNWK9rEgg8jlIVIiThIoi6wUVRMwSrjtnFT+eFqybf8pRUMsdMEo9iLcncyktQv4Umm3HtR+gFikMCTXA/hMSu3wQI/P6a+zx77XGu+n9olwJucpCfrrS1m2AwfoEutRWVVcmD8eZbY7K598Kw0SRzWN0KBYG6H4cg==" },
@@ -113,11 +120,16 @@
             });
     }
 
+    async function asyncImportEsModule(pkgName) {
+        // eslint-disable-next-line no-eval
+        return await eval(`(async () => {return await import('${pkgName}')})()`);
+    }
+
 
     let siteConfig
     async function loadSiteConfig() {
         if(siteConfig) return siteConfig;
-        await fetch('/config.json')
+        return await fetch('/config.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -140,50 +152,64 @@
         return config?.CSRF_TOKEN_PREFIX || defaultPrefix;
     }
 
+    const forge = (await asyncImportEsModule('https://cdn.jsdelivr.net/npm/node-forge@1.3.2/+esm')).default
+    const {Buffer} = await asyncImportEsModule('https://cdn.jsdelivr.net/npm/buffer@6.0.3/+esm')
 
-    // 将 JWK 格式导入为 CryptoKey
-    async function importPublicKey(jwk, padding = 'MGF1_SHA256') {
-        const alg = {
-            name: padding.startsWith('PKCS1') ? 'RSAES-PKCS1-v1_5' : 'RSA-OAEP',
-            hash: padding.endsWith('SHA1') ? 'SHA-1' : 'SHA-256',
-        };
+    const base64UrlToBase64 = (base64Url) => {
+        return base64Url
+            .replace(/-/g, '+')
+            .replace(/_/g, '/')
+            .concat('='.repeat((4 - (base64Url.length % 4)) % 4));
+    };
 
-        return await crypto.subtle.importKey(
-            'jwk',
-            jwk,
-            alg,
-            false, // 不可导出
-            ['encrypt'],
+    const jwkToPem = async (jwk) => {
+        if (jwk.kty !== 'RSA') {
+            throw new Error('Only RSA keys are supported');
+        }
+        if (!jwk.n || !jwk.e) {
+            throw new Error('Missing modulus (n) or exponent (e) in JWK');
+        }
+
+        const n = Buffer.from(base64UrlToBase64(jwk.n), 'base64');
+        const e = Buffer.from(base64UrlToBase64(jwk.e), 'base64');
+
+        const publicKey = forge.pki.setRsaPublicKey(
+            new forge.jsbn.BigInteger(n.toString('hex'), 16),
+            new forge.jsbn.BigInteger(e.toString('hex'), 16),
         );
-    }
 
-// 加密函数
-    async function encryptByPadding(encryptText, jwk, padding = 'MGF1_SHA256') {
-        const key = await importPublicKey(jwk, padding);
-        const enc = new TextEncoder().encode(encryptText);
+        return forge.pki.publicKeyToPem(publicKey);
+    };
 
-        const algo =
-            padding.startsWith('PKCS1')
-                ? { name: 'RSAES-PKCS1-v1_5' }
-                : { name: 'RSA-OAEP' };
-
-        const encrypted = await crypto.subtle.encrypt(algo, key, enc);
-        return btoa(String.fromCharCode(...new Uint8Array(encrypted)));
-    }
 
 // 对外暴露主函数
     async function encrypt(encryptText, jwk) {
         const config = await loadSiteConfig()
+        console.log('config>>>', config)
         const padding = (config?.['RSA_ENCRYPTION_PADDING'] ?? 'MGF1_SHA256').toUpperCase();
 
+        const publicKeyPem = await jwkToPem(jwk);
+        const publicKey = forge.pki.publicKeyFromPem(publicKeyPem);
+
+        let encrypted;
         if (padding === 'MGF1' || padding === 'MGF1_SHA1') {
-            return await encryptByPadding(encryptText, jwk, 'MGF1_SHA1');
+            encrypted = publicKey.encrypt(forge.util.encodeUtf8(encryptText), 'RSA-OAEP', {
+                md: forge.md.sha1.create(),
+                mgf1: {
+                    md: forge.md.sha1.create(),
+                },
+            });
         } else if (padding === 'PKCS1') {
-            return await encryptByPadding(encryptText, jwk, 'PKCS1');
+            encrypted = publicKey.encrypt(encryptText, 'RSAES-PKCS1-V1_5');
         } else {
-            // 默认 MGF1 + SHA256
-            return await encryptByPadding(encryptText, jwk, 'MGF1_SHA256');
+            encrypted = publicKey.encrypt(forge.util.encodeUtf8(encryptText), 'RSA-OAEP', {
+                md: forge.md.sha256.create(),
+                mgf1: {
+                    md: forge.md.sha256.create(),
+                },
+            });
         }
+        return forge.util.encode64(encrypted);
     }
 
     async function getCSRF() {
