@@ -27,7 +27,54 @@
   const cfg = await loadConfig();
   const DEFAULT_PASSWORD = cfg.defaultPassword;
   const host = window.location.host;
-  const USERS = cfg.hosts[host] || cfg.defaultUsers;
+  // USERS 为可变引用，rebuildFab 时替换整个数组
+  let USERS = cfg.hosts[host] || cfg.defaultUsers;
+
+  // ========================
+  // 监听 popup 触发的"立即登录"信号
+  // popup 写入 quickLoginPendingLogin，本页面 host 匹配则立即登录
+  // ========================
+  function watchPendingLogin() {
+    if (typeof chrome === 'undefined' || !chrome.storage || !chrome.storage.onChanged) return;
+    chrome.storage.onChanged.addListener((changes, area) => {
+      if (area !== 'local' || !changes.quickLoginPendingLogin) return;
+      const payload = changes.quickLoginPendingLogin.newValue;
+      if (!payload || !payload.user) return;
+      // 仅匹配当前 host 的请求生效（避免不同 host 间串扰）
+      if (payload.host && payload.host !== '__default__' && payload.host !== host) return;
+      // 一次性消费：立刻清掉
+      chrome.storage.local.remove('quickLoginPendingLogin');
+      loginWithUser(payload.user);
+    });
+  }
+  watchPendingLogin();
+
+  // ========================
+  // 监听 popup 改 config → 重建 UI（FAB 列表）
+  // ========================
+  function watchConfigChanges() {
+    if (typeof chrome === 'undefined' || !chrome.storage || !chrome.storage.onChanged) return;
+    chrome.storage.onChanged.addListener((changes, area) => {
+      if (area !== 'local' || !changes.quickLoginConfig) return;
+      const newCfg = changes.quickLoginConfig.newValue;
+      if (!newCfg) return;
+      const newUsers = newCfg.hosts[host] || newCfg.defaultUsers;
+      // 元素级比较：名字 + 账号 + vault 都一致才不重建
+      if (sameUsers(USERS, newUsers)) return;
+      rebuildFab(newUsers);
+    });
+  }
+  function sameUsers(a, b) {
+    if (a === b) return true;
+    if (!a || !b || a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+      if (a[i].name !== b[i].name) return false;
+      if (a[i].accountId !== b[i].accountId) return false;
+      if (a[i].vault !== b[i].vault) return false;
+    }
+    return true;
+  }
+  watchConfigChanges();
 
   if (!USERS || USERS.length === 0) return;
 
@@ -237,10 +284,12 @@
   // ========================
   // 悬浮按钮 (FAB) UI
   // ========================
-  const ctrlDiv = document.createElement('div');
-  ctrlDiv.id = 'quick-login-controller';
-  ctrlDiv.innerHTML = `
-<style>
+  // 全局只注入一次样式（避免重建 FAB 时重复插入 <style>）
+  function ensureFabStyles() {
+    if (document.getElementById('quick-login-fab-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'quick-login-fab-styles';
+    style.textContent = `
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 #quick-login-fab-wrapper { position: fixed; top: 100px; left: 20px; z-index: 9999; display: flex; gap: 10px; }
 #quick-login-fab { opacity: 0.75; width: 48px; height: 48px; border-radius: 50%; cursor: grab; background: #136fb736;
@@ -251,16 +300,52 @@
 .quick-login-fab-btns { display: none; flex-direction: column; gap: 6px; top: 0; left: 60px; }
 .quick-login-fab-btns button { text-align: left; padding: 4px 8px; font-size: 12px; background-color: white;
     border: 1px solid #ccc; border-radius: 6px; cursor: pointer; white-space: nowrap; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-</style>
-<div id="quick-login-fab-wrapper">
-  <div id="quick-login-fab">
-    <svg style="transform: scale(0.7); opacity: 1" fill="#ecf9fd" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 590.75c-142.5 0-258.75-116.25-258.75-258.75s116.25-262.5 258.75-262.5 258.75 116.25 258.75 258.75-116.25 262.5-258.75 262.5zM512 144.5c-101.25 0-183.75 82.5-183.75 183.75s82.5 183.75 183.75 183.75 183.75-82.5 183.75-183.75-82.5-183.75-183.75-183.75z"></path><path d="M170.75 950.75c-18.75 0-37.5-15-37.5-37.5 0-7.5 0-11.25 0-15 0-210 172.5-382.5 382.5-382.5 22.5 0 37.5 15 37.5 37.5s-15 37.5-37.5 37.5c-168.75 0-307.5 138.75-307.5 307.5v11.25c0 22.5-18.75 41.25-37.5 41.25v0z"></path><path d="M853.25 947v0c-22.5 0-37.5-15-37.5-37.5v-11.25c0-168.75-138.75-307.5-307.5-307.5-22.5 0-37.5-15-37.5-37.5s15-37.5 37.5-37.5c210 0 382.5 172.5 382.5 382.5 0 3.75 0 7.5 0 11.25 0 22.5-15 37.5-37.5 37.5z"></path></svg>
-  </div>
-  <div class="quick-login-fab-btns">
-    ${USERS.map((u, i) => `<button class="quick-login-btn" data-index="${i}">Alt + ${i + 1}. 快速登录 ${u.name}</button>`).join('')}
-  </div>
+`;
+    document.head.appendChild(style);
+  }
+
+  function buildFabWrapper(users) {
+    const wrapper = document.createElement('div');
+    wrapper.id = 'quick-login-fab-wrapper';
+    wrapper.innerHTML = `
+<div id="quick-login-fab">
+  <svg style="transform: scale(0.7); opacity: 1" fill="#ecf9fd" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 590.75c-142.5 0-258.75-116.25-258.75-258.75s116.25-262.5 258.75-262.5 258.75 116.25 258.75 258.75-116.25 262.5-258.75 262.5zM512 144.5c-101.25 0-183.75 82.5-183.75 183.75s82.5 183.75 183.75 183.75 183.75-82.5 183.75-183.75-82.5-183.75-183.75-183.75z"></path><path d="M170.75 950.75c-18.75 0-37.5-15-37.5-37.5 0-7.5 0-11.25 0-15 0-210 172.5-382.5 382.5-382.5 22.5 0 37.5 15 37.5 37.5s-15 37.5-37.5 37.5c-168.75 0-307.5 138.75-307.5 307.5v11.25c0 22.5-18.75 41.25-37.5 41.25v0z"></path><path d="M853.25 947v0c-22.5 0-37.5-15-37.5-37.5v-11.25c0-168.75-138.75-307.5-307.5-307.5-22.5 0-37.5-15-37.5-37.5s15-37.5 37.5-37.5c210 0 382.5 172.5 382.5 382.5 0 3.75 0 7.5 0 11.25 0 22.5-15 37.5-37.5 37.5z"></path></svg>
+</div>
+<div class="quick-login-fab-btns">
+  ${users.map((u, i) => `<button class="quick-login-btn" data-index="${i}">Alt + ${i + 1}. 快速登录 ${escapeHtml(u.name)}</button>`).join('')}
 </div>`;
-  document.body.appendChild(ctrlDiv);
+    return wrapper;
+  }
+
+  // 注入 FAB 容器（首次）/ 重建 FAB（配置变更时）。返回最新 wrapper 引用。
+  function mountFab() {
+    ensureFabStyles();
+    const old = document.getElementById('quick-login-fab-wrapper');
+    const newWrapper = buildFabWrapper(USERS);
+    if (old) {
+      // 保留旧的位置 / 显示状态
+      newWrapper.style.left = old.style.left;
+      newWrapper.style.top = old.style.top;
+      newWrapper.style.display = old.style.display;
+      old.replaceWith(newWrapper);
+    } else {
+      document.body.appendChild(newWrapper);
+    }
+    attachFabHandlers(newWrapper);
+    return newWrapper;
+  }
+
+  // 用 popup 改过的新 user 列表原地重建 FAB
+  function rebuildFab(newUsers) {
+    USERS = newUsers;
+    mountFab();
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text ?? '';
+    return div.innerHTML;
+  }
 
   // ========================
   // FAB 拖拽 & 位置持久化
@@ -283,23 +368,34 @@
     wrapper.style.display = visible === 'false' ? 'none' : 'flex';
   }
 
-  const wrapper = document.getElementById('quick-login-fab-wrapper');
-  const fab = document.getElementById('quick-login-fab');
   let isDragging = false;
   let offsetX = 0;
   let offsetY = 0;
 
-  loadFabPosition(wrapper);
+  function attachFabHandlers(wrapper) {
+    const fab = wrapper.querySelector('#quick-login-fab');
 
-  fab.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    offsetX = e.clientX - wrapper.offsetLeft;
-    offsetY = e.clientY - wrapper.offsetTop;
-    fab.style.cursor = 'grabbing';
-  });
+    loadFabPosition(wrapper);
+
+    fab.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      offsetX = e.clientX - wrapper.offsetLeft;
+      offsetY = e.clientY - wrapper.offsetTop;
+      fab.style.cursor = 'grabbing';
+    });
+
+    wrapper.querySelectorAll('.quick-login-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const idx = +btn.getAttribute('data-index');
+        loginWithUser(USERS[idx]);
+      });
+    });
+  }
 
   document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
+    const wrapper = document.getElementById('quick-login-fab-wrapper');
+    if (!wrapper) return;
     const halfWidth = wrapper.offsetWidth / 2;
     const halfHeight = wrapper.offsetHeight / 2;
 
@@ -313,15 +409,11 @@
 
   document.addEventListener('mouseup', () => {
     isDragging = false;
-    fab.style.cursor = 'grab';
+    const fab = document.querySelector('#quick-login-fab');
+    if (fab) fab.style.cursor = 'grab';
   });
 
-  document.querySelectorAll('.quick-login-btn').forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      const idx = +e.target.getAttribute('data-index');
-      loginWithUser(USERS[idx]);
-    });
-  });
+  mountFab();
 
   // ========================
   // 登录表单内嵌按钮

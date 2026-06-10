@@ -119,6 +119,7 @@
             }
           </div>
           <div class="user-actions">
+            <button class="btn-icon btn-login" data-index="${i}" title="用此用户登录当前标签页">🔑</button>
             <button class="btn-icon btn-edit" data-index="${i}" title="编辑">✏️</button>
             <button class="btn-icon danger btn-delete" data-index="${i}" title="删除">🗑</button>
           </div>
@@ -126,6 +127,12 @@
       )
       .join('');
 
+    userList.querySelectorAll('.btn-login').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        loginUser(+btn.dataset.index);
+      });
+    });
     userList.querySelectorAll('.btn-edit').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -137,6 +144,41 @@
         e.stopPropagation();
         deleteUser(+btn.dataset.index);
       });
+    });
+  }
+
+  // ========================
+  // Trigger login in current tab
+  // ========================
+  function loginUser(index) {
+    const users = getUsers();
+    const user = users[index];
+    if (!user) return;
+    if (!user.password && !user.vault) {
+      alert('此用户既无密码也无 Vault，无法登录');
+      return;
+    }
+
+    // Write a one-shot signal to storage. The content script on the active tab
+    // watches for this and runs loginWithUser, then clears the signal.
+    const payload = {
+      host: selectedHost,
+      user: {
+        name: user.name,
+        accountId: user.accountId,
+        password: user.password,
+        vault: user.vault,
+        domainCode: user.domainCode,
+      },
+      ts: Date.now(),
+    };
+
+    chrome.storage.local.set({ quickLoginPendingLogin: payload }, () => {
+      if (chrome.runtime.lastError) {
+        alert('触发登录失败：' + chrome.runtime.lastError.message);
+      } else {
+        window.close();
+      }
     });
   }
 
@@ -310,11 +352,38 @@
     try {
       const stored = await loadFromStorage();
       config = stored || deepClone(QUICK_LOGIN_CONFIG);
+
+      // 默认选中当前标签页对应的主机（若有），否则用"默认用户"
+      const currentHost = await getCurrentTabHost();
+      if (currentHost && config.hosts[currentHost]) {
+        selectedHost = currentHost;
+      }
+
       render();
     } catch (e) {
       console.error('init failed:', e);
       alert('初始化失败：' + e.message);
     }
+  }
+
+  // 读取当前活动标签页的 host
+  function getCurrentTabHost() {
+    return new Promise((resolve) => {
+      try {
+        if (!chrome.tabs || !chrome.tabs.query) return resolve(null);
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          if (chrome.runtime.lastError || !tabs || !tabs[0]) return resolve(null);
+          try {
+            const url = new URL(tabs[0].url || '');
+            resolve(url.host || null);
+          } catch {
+            resolve(null);
+          }
+        });
+      } catch {
+        resolve(null);
+      }
+    });
   }
 
   // ========================

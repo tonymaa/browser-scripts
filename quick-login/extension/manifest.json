@@ -3,7 +3,7 @@
   "name": "Quick Login",
   "version": "0.3",
   "description": "快速登录插件 - Browser Extension 版（可视化配置）",
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "Quick Login 配置"
