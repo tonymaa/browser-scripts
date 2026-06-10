@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Login 配置</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 440px;
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      color: #333;
+      background: #f5f6f8;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #5290ED, #3a7bd5);
+      color: #fff;
+    }
+    .header h1 { font-size: 15px; font-weight: 600; }
+    .header-actions { display: flex; gap: 6px; }
+    .header-actions button {
+      background: rgba(255,255,255,0.2); border: none; color: #fff;
+      padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;
+    }
+    .header-actions button:hover { background: rgba(255,255,255,0.35); }
+
+    /* ---- Toolbar ---- */
+    .toolbar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px;
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .toolbar select {
+      flex: 1; padding: 6px 8px; border: 1px solid #d9d9d9;
+      border-radius: 6px; font-size: 13px; background: #fff;
+    }
+    .toolbar .btn-sm {
+      padding: 5px 10px; border: 1px solid #d9d9d9; border-radius: 6px;
+      background: #fff; cursor: pointer; font-size: 12px; white-space: nowrap;
+    }
+    .toolbar .btn-sm:hover { border-color: #5290ED; color: #5290ED; }
+    .toolbar .btn-sm.danger:hover { border-color: #ff4d4f; color: #ff4d4f; }
+
+    /* ---- Settings row ---- */
+    .settings-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 16px;
+      background: #fffbe6;
+      border-bottom: 1px solid #fff1b8;
+      font-size: 12px; color: #8c8c8c;
+    }
+    .settings-row label { white-space: nowrap; }
+    .settings-row input {
+      flex: 1; padding: 4px 8px; border: 1px solid #d9d9d9;
+      border-radius: 4px; font-size: 12px; font-family: monospace;
+    }
+
+    /* ---- User list ---- */
+    .user-list { padding: 8px 16px; max-height: 320px; overflow-y: auto; }
+    .empty-state {
+      text-align: center; padding: 32px 16px; color: #bfbfbf;
+      font-size: 13px;
+    }
+    .user-card {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px; margin-bottom: 6px;
+      background: #fff; border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      transition: box-shadow 0.2s;
+    }
+    .user-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .user-info { flex: 1; min-width: 0; }
+    .user-name { font-weight: 600; font-size: 13px; color: #262626; }
+    .user-account { font-size: 12px; color: #8c8c8c; margin-top: 2px; }
+    .user-vault-preview {
+      font-size: 11px; color: #bfbfbf; margin-top: 2px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      max-width: 250px;
+    }
+    .user-actions { display: flex; gap: 4px; margin-left: 8px; flex-shrink: 0; }
+    .btn-icon {
+      width: 28px; height: 28px; border: none; border-radius: 6px;
+      background: transparent; cursor: pointer; font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .btn-icon:hover { background: #f0f0f0; }
+    .btn-icon.danger:hover { background: #fff1f0; }
+
+    /* ---- Footer ---- */
+    .footer {
+      padding: 10px 16px;
+      background: #fff;
+      border-top: 1px solid #e8e8e8;
+      display: flex; gap: 8px;
+    }
+    .footer .btn-primary {
+      flex: 1; padding: 8px 16px; border: none; border-radius: 6px;
+      background: #5290ED; color: #fff; cursor: pointer; font-size: 13px;
+      font-weight: 500;
+    }
+    .footer .btn-primary:hover { background: #4080dd; }
+    .footer .btn-secondary {
+      padding: 8px 12px; border: 1px solid #d9d9d9; border-radius: 6px;
+      background: #fff; cursor: pointer; font-size: 13px;
+    }
+    .footer .btn-secondary:hover { border-color: #5290ED; color: #5290ED; }
+
+    /* ---- Form overlay ---- */
+    .form-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.3); z-index: 100;
+    }
+    .form-panel {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #fff; padding: 16px; z-index: 101;
+      border-radius: 12px 12px 0 0;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+    }
+    .form-panel h3 {
+      font-size: 14px; font-weight: 600; margin-bottom: 12px;
+    }
+    .form-group {
+      margin-bottom: 10px;
+    }
+    .form-group label {
+      display: block; font-size: 12px; color: #8c8c8c;
+      margin-bottom: 4px;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%; padding: 6px 10px; border: 1px solid #d9d9d9;
+      border-radius: 6px; font-size: 13px; font-family: inherit;
+    }
+    .form-group textarea { resize: vertical; min-height: 60px; font-family: monospace; font-size: 11px; }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none; border-color: #5290ED;
+      box-shadow: 0 0 0 2px rgba(82,144,237,0.2);
+    }
+    .form-group .hint { font-size: 11px; color: #bfbfbf; margin-top: 2px; }
+    .form-actions { display: flex; gap: 8px; margin-top: 14px; }
+    .form-actions button {
+      flex: 1; padding: 8px 16px; border-radius: 6px; cursor: pointer;
+      font-size: 13px;
+    }
+    .form-actions .btn-save {
+      background: #5290ED; color: #fff; border: none; font-weight: 500;
+    }
+    .form-actions .btn-save:hover { background: #4080dd; }
+    .form-actions .btn-cancel {
+      background: #fff; border: 1px solid #d9d9d9;
+    }
+    .form-actions .btn-cancel:hover { border-color: #5290ED; color: #5290ED; }
+    .form-error {
+      color: #ff4d4f; font-size: 12px; margin-top: 6px; display: none;
+    }
+
+    /* ---- Hidden file input ---- */
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>🔑 Quick Login</h1>
+    <div class="header-actions">
+      <button id="btn-import" title="导入 JSON 配置文件">📥 导入</button>
+      <button id="btn-export" title="导出 JSON 配置文件">📤 导出</button>
+      <button id="btn-reset" title="重置为默认配置">🔄 重置</button>
+    </div>
+  </div>
+
+  <!-- Toolbar: host selector -->
+  <div class="toolbar">
+    <select id="host-select"></select>
+    <button class="btn-sm" id="btn-add-host">➕ 主机</button>
+    <button class="btn-sm danger" id="btn-del-host">🗑 删除主机</button>
+  </div>
+
+  <!-- Default password -->
+  <div class="settings-row">
+    <label>默认密码：</label>
+    <input type="text" id="input-default-pw" placeholder="Password$1234" />
+  </div>
+
+  <!-- User list -->
+  <div class="user-list" id="user-list"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <button class="btn-primary" id="btn-add-user">➕ 添加用户</button>
+  </div>
+
+  <!-- Edit form overlay -->
+  <div class="form-overlay" id="form-overlay">
+    <div class="form-panel">
+      <h3 id="form-title">添加用户</h3>
+      <div class="form-group">
+        <label>名称 *</label>
+        <input type="text" id="input-name" placeholder="显示名称，如：管理员" />
+      </div>
+      <div class="form-group">
+        <label>账号 ID *</label>
+        <input type="text" id="input-accountId" placeholder="登录账号，如：admin" />
+      </div>
+      <div class="form-group">
+        <label>密码（明文）</label>
+        <input type="text" id="input-password" placeholder="可选，用于加密登录" />
+        <div class="hint">填写后每次登录会用公钥重新加密，不填则直接使用 Vault</div>
+      </div>
+      <div class="form-group">
+        <label>Vault（加密密码）</label>
+        <textarea id="input-vault" placeholder="可选，已用公钥加密的密文"></textarea>
+        <div class="hint">已有的加密密文。如果同时填了密码，登录时会优先用密码加密</div>
+      </div>
+      <div class="form-group">
+        <label>Domain Code</label>
+        <input type="text" id="input-domainCode" placeholder="可选，默认 designer" />
+      </div>
+      <div class="form-error" id="form-error"></div>
+      <div class="form-actions">
+        <button class="btn-save" id="btn-save-user">💾 保存</button>
+        <button class="btn-cancel" id="btn-cancel-user">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden file input for import -->
+  <input type="file" id="file-import" class="hidden" accept=".json" />
+
+  <!-- Load defaults from config.js, then run popup logic. defer 保留执行顺序。 -->
+  <script src="../config.js" defer></script>
+  <script src="popup.js" defer></script>
+</body>
+</html>
